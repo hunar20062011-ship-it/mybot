@@ -413,7 +413,7 @@ def handle_text(message):
     elif text == "🏠 سەرەتا":
         show_main(chat_id)
 
-# بەشە زیادکراوەکەی Dummy Server
+# بەشە چاککراوەکەی Dummy Server
 app = Flask(__name__)
 
 @app.route('/')

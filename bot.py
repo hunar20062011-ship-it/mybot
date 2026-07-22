@@ -239,7 +239,7 @@ def show_study_sections(chat_id):
     user_step[chat_id] = 'study_sections'
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     markup.add("بەشی ئەسیلەکان", "بەشی مەلزەمەکان")
-    markup.add("بەشی کورتکراوەکان", "بەشی پرسیاری کویز")
+    markup.add("بەشی کورتکراوەکان", " کویزی زیندەزانی کۆرسی زیندەجۆکەر🧬")
     markup.add("🏠 سەرەتا")
     bot.send_message(chat_id, "بەشێک هەڵبژێرە:", reply_markup=markup)
 
@@ -327,8 +327,18 @@ def handle_text(message):
     elif text == "🎓 خوێندن":
         show_study_sections(chat_id)
         
-    elif text in ["بەشی مەلزەمەکان", "بەشی کورتکراوەکان", "بەشی پرسیاری کویز"]:
+    elif text in ["بەشی مەلزەمەکان", "بەشی کورتکراوەکان"]:
         bot.send_message(chat_id, "ئەم بەشە بەمزووانە بەردەست دەبێت ⏳")
+        
+    elif text == " کویزی زیندەزانی کۆرسی زیندەجۆکەر🧬":
+        user_step[chat_id] = 'quiz_chapters'
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        markup.add("بەندی یەکەم", "بەندی دووەم")
+        markup.add("بەندی سێیەم", "بەندی چوارەم")
+        markup.add("بەندی پێنجەم", "بەندی شەشەم")
+        markup.add("بەندی حەوتەم", "بەندی هەشتەم")
+        markup.add("⬅️ گەڕانەوە", "🏠 سەرەتا")
+        bot.send_message(chat_id, "بەندێک هەڵبژێرە:", reply_markup=markup)
         
     elif text == "بەشی ئەسیلەکان":
         show_exam_categories(chat_id)
@@ -406,6 +416,8 @@ def handle_text(message):
         elif step == 'subjects':
             show_exam_categories(chat_id)
         elif step == 'exam_categories':
+            show_study_sections(chat_id)
+        elif step == 'quiz_chapters':
             show_study_sections(chat_id)
         else:
             show_main(chat_id)
